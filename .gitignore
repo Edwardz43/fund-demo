@@ -133,3 +133,6 @@ dist
 # ide
 .vscode
 .idea
+
+# build
+build/*
