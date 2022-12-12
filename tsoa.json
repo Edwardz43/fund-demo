@@ -1,13 +1,23 @@
 {
   "entryFile": "src/app.ts",
   "noImplicitAdditionalProperties": "throw-on-extras",
-  "controllerPathGlobs": ["src/**/controller.ts"],
+  "controllerPathGlobs": [
+    "src/**/controller.ts"
+  ],
   "spec": {
     "outputDirectory": "build",
     "specVersion": 3
   },
+  "swagger": {
+    "outputDirectory": "swagger.json",
+    "entryFile": "src/app.ts",
+    "host": "localhost:3000",
+    "basePath": "/",
+    "noImplicitAdditionalProperties": "throw-on-extras"
+  },
   "routes": {
     "routesDir": "build",
+    "middleware": "koa",
     "iocModule": "src/ioc",
     "authenticationModule": "./src/auth/authentication.ts"
   }

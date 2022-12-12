@@ -3,7 +3,7 @@ import {verify} from 'jsonwebtoken';
 
 export const secret = 'my@secrEte';
 
-export function expressAuthentication(
+export function koaAuthentication(
 	request: Request,
 	securityName: string,
 	_?: string[]

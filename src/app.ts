@@ -1,20 +1,36 @@
-import express, {json, Request as ExRequest, Response as ExResponse, urlencoded} from 'express';
+import Koa from 'koa';
+import Router from '@koa/router';
+import bodyParser from 'koa-bodyparser';
 import {RegisterRoutes} from '../build/routes';
-import swaggerUi from 'swagger-ui-express';
+import koaStatic from 'koa-static';
+import {koaSwagger} from 'koa2-swagger-ui';
+import path from 'path';
 
-export const app = express();
+export const app = new Koa();
+app.use(bodyParser());
 
-app.use(
-	urlencoded({
-		extended: true,
-	})
-);
-app.use(json());
+const router = new Router();
 
-app.use('/docs', swaggerUi.serve, async (_req: ExRequest, res: ExResponse) => {
-	return res.send(
-		swaggerUi.generateHTML(await import('../build/swagger.json'))
-	);
+RegisterRoutes(router);
+
+app.use(async (context, next) => {
+	try {
+		await next();
+	} catch (err: any) {
+		context.status = err.status || 500;
+		context.body = err.message || 'An error occurred during the request.';
+	}
 });
 
-RegisterRoutes(app);
+app.use(router.routes()).use(router.allowedMethods());
+app.use(koaStatic('../build/swagger.json'));
+app.use(
+	koaSwagger({
+		routePrefix: false,
+		hideTopbar: true,
+		swaggerOptions: {
+			spec: require(path.join(__dirname, '../swagger.json'))
+		},
+	}),
+);
+
