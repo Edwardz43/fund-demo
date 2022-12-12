@@ -11,12 +11,30 @@
   "dependencies": {
     "@types/multer": "^1.4.7",
     "express": "^4.18.2",
+    "inversify": "^6.0.1",
+    "inversify-binding-decorators": "^4.0.0",
+    "joi": "^17.7.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.14.1",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^12.0.0",
+    "koa-static": "^5.0.0",
+    "koa2-swagger-ui": "^5.6.0",
     "multer": "^1.4.5-lts.1",
+    "swagger-ui-express": "^4.6.0",
     "tsoa": "^4.1.3"
   },
   "devDependencies": {
     "@types/express": "^4.17.14",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/koa-bodyparser": "^4.2.0",
+    "@types/koa-router": "^7.4.4",
+    "@types/koa-static": "^4.0.2",
     "@types/node": "^18.11.12",
+    "@types/swagger-ui-express": "^4.1.3",
+    "@typescript-eslint/eslint-plugin": "^5.46.0",
+    "@typescript-eslint/parser": "^5.46.0",
+    "eslint": "^8.29.0",
     "typescript": "^4.9.4"
   }
 }
