@@ -5,7 +5,7 @@ export const mockFunds = (): Fund[] => {
 	for (let i = 0; i < 3; i++) {
 		const fund: Fund = {
 			id: i + 1,
-			name: 'FUND' + i.toString().padStart(2, '0'),
+			name: 'FUND' + (i + 1).toString().padStart(2, '0'),
 			f_type: FundType.A,
 			currency: Currency[Currency.USD],
 			nav: 35.43,
