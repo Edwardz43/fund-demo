@@ -1,7 +1,7 @@
 # Fund Demo
 
 A demonstration of the mutual fund system with the [tsoa](https://tsoa-community.github.io/docs/introduction.html)
-framework, which is.
+framework, which is an integration include [koa](https://koajs.com/#introduction) framework.
 
 ## User Story
 
