@@ -7,7 +7,7 @@ export const mockFunds = (): Fund[] => {
 			id: i + 1,
 			name: 'FUND' + (i + 1).toString().padStart(2, '0'),
 			f_type: FundType.A,
-			currency: Currency[Currency.USD],
+			currency: Currency.USD,
 			nav: 35.43,
 			fee: 1.5,
 			prospectus: 'some announcement here',
