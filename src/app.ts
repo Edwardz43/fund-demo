@@ -5,14 +5,15 @@ import {RegisterRoutes} from '../build/routes';
 import koaStatic from 'koa-static';
 import {koaSwagger} from 'koa2-swagger-ui';
 import path from 'path';
+import {insertCorrelationId} from './middlewares/request-id';
+import {logRequest} from './middlewares/request-log';
 
 export const app = new Koa();
 app.use(bodyParser());
+app.use(insertCorrelationId);
+app.use(logRequest);
 
-const router = new Router();
-
-RegisterRoutes(router);
-
+// exception middleware
 app.use(async (context, next) => {
 	try {
 		await next();
@@ -22,7 +23,12 @@ app.use(async (context, next) => {
 	}
 });
 
+// routers config
+const router = new Router();
+RegisterRoutes(router);
 app.use(router.routes()).use(router.allowedMethods());
+
+// swagger config
 app.use(koaStatic('../build/swagger.json'));
 app.use(
 	koaSwagger({
