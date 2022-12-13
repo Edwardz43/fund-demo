@@ -1,4 +1,4 @@
-import {Request} from 'express';
+import {Request} from 'koa';
 import {verify} from 'jsonwebtoken';
 
 export const secret = 'my@secrEte';
@@ -7,10 +7,10 @@ export function koaAuthentication(
 	request: Request,
 	securityName: string,
 	_?: string[]
-): Promise<string | undefined | void> {
+): Promise<unknown> {
 	if (securityName === 'jwt') {
 		const token =
-			request.body.token ||
+			request.get('token') ||
 			request.query.token ||
 			request.headers['x-access-token'];
 
@@ -18,7 +18,7 @@ export function koaAuthentication(
 			if (!token) {
 				reject(new Error('No token provided'));
 			}
-			verify(token, secret, function (err: any, decoded: any) {
+			verify(<string>token, secret, function (err: unknown, decoded: unknown) {
 				if (err) {
 					reject(err);
 				} else {
